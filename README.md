@@ -6,9 +6,11 @@ Void is an iOS SwiftUI app whose only real feature is a button that
 does nothing. Everything else — streaks, achievements, analytics
 charts, a changelog, a ⌘K command palette, sound effects, haptics,
 confetti — exists purely to dress that button up as a real, polished
-product. It's dark-only by design, navigated with a floating iOS 26
-Liquid Glass tab bar, fully usable, has an actual test suite, and takes
-itself completely seriously.
+product. It's dark-only by design, styled after Vercel's black theme
+(near-pure-black surfaces, hairline borders, a single blue accent used
+sparingly, an inverted white-on-black primary CTA), navigated with a
+floating iOS 26 Liquid Glass tab bar, fully usable, has an actual test
+suite, and takes itself completely seriously.
 
 ## What it does
 
@@ -47,8 +49,21 @@ Sources/VoidCore/        <- pure logic (Linux/macOS/CI testable)
 Tests/VoidCoreTests/     <- 28 tests covering streaks, achievements, stats, formatting
 project.yml              <- XcodeGen manifest for the iOS app
 Sources/Void/             <- SwiftUI views, models, support code
-Resources/Assets.xcassets <- app icon + dark-only color assets
+Sources/Void/UI/          <- the shadcn-style component kit (see below)
+Resources/Assets.xcassets <- app icon + Vercel-black color assets
 ```
+
+### The shadcn-style UI kit
+
+`Sources/Void/UI/` is a small, first-party set of primitives modeled on
+[shadcn/ui](https://ui.shadcn.com)'s components (`Button` variants,
+`Badge`, `Separator`) - rebuilt directly in this codebase rather than
+pulled in as a black-box dependency, in the same "copy it, own it,
+customize it" spirit shadcn/ui itself is built on. If you'd rather
+depend on a packaged version instead, the community ports
+[SwiftCN](https://github.com/gillesdm/SwiftCN) and
+[swiftcn-ui](https://github.com/Mobilecn-UI/swiftcn-ui) do the same
+thing as an SPM dependency.
 
 `VoidCore` was written and verified with a real Swift 6.3 toolchain
 (`swift test`, all 28 tests green) in an environment without Xcode. The

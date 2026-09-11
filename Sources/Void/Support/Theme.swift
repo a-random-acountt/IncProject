@@ -1,8 +1,10 @@
 import SwiftUI
 
-/// Design tokens for Void. Colors are backed by Assets.xcassets color sets
-/// (each with its own light/dark appearance) so the system dark mode toggle
-/// "just works"; this file only names them and adds spacing/type scale.
+/// Design tokens for Void, styled after Vercel's black theme: near-pure-black
+/// surfaces, translucent hairline borders, and a single blue accent used
+/// sparingly rather than as the default fill for every control. Colors are
+/// backed by Assets.xcassets color sets; this file only names them and adds
+/// the spacing/radius scale.
 extension Color {
     static let appBackground = Color("VoidBackground")
     static let appSurface = Color("VoidSurface")
@@ -28,9 +30,9 @@ enum Metrics {
     static let spacingXL: CGFloat = 32
     static let spacingXXL: CGFloat = 48
 
-    static let radiusSM: CGFloat = 8
-    static let radiusMD: CGFloat = 12
-    static let radiusLG: CGFloat = 20
+    static let radiusSM: CGFloat = 6
+    static let radiusMD: CGFloat = 8
+    static let radiusLG: CGFloat = 12
 
     static let hairline: CGFloat = 1
 }

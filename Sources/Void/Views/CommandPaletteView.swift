@@ -28,7 +28,7 @@ struct CommandPaletteView: View {
                 }
                 .padding(Metrics.spacingMD)
 
-                Divider()
+                ShadcnSeparator()
 
                 List(filteredCommands) { command in
                     Button {

@@ -35,7 +35,7 @@ struct ChangelogView: View {
             HStack(spacing: Metrics.spacingSM) {
                 Text("v\(entry.version)")
                     .monospacedLabel(13, weight: .semibold)
-                tagPill(entry.tag)
+                ShadcnBadge(text: entry.tag.rawValue, tone: tone(for: entry.tag))
                 Spacer()
                 Text(entry.date)
                     .font(.caption)
@@ -49,22 +49,12 @@ struct ChangelogView: View {
         .cardBackground()
     }
 
-    private func tagPill(_ tag: ChangelogTag) -> some View {
-        Text(tag.rawValue)
-            .font(.caption2.weight(.semibold))
-            .padding(.horizontal, Metrics.spacingSM)
-            .padding(.vertical, 2)
-            .background(tagColor(tag).opacity(0.15))
-            .foregroundStyle(tagColor(tag))
-            .clipShape(Capsule())
-    }
-
-    private func tagColor(_ tag: ChangelogTag) -> Color {
+    private func tone(for tag: ChangelogTag) -> ShadcnBadge.Tone {
         switch tag {
-        case .feature: return .accentColor
-        case .improvement: return .appSuccess
-        case .fix: return .appWarning
-        case .removed: return .appDanger
+        case .feature: return .accent
+        case .improvement: return .success
+        case .fix: return .warning
+        case .removed: return .danger
         }
     }
 }

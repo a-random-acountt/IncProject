@@ -18,20 +18,20 @@ struct NothingButton: View {
     var body: some View {
         Button(action: action) {
             ZStack {
+                // Vercel's primary-CTA convention: inverted white-on-black,
+                // not the accent color - accent stays a sparing highlight
+                // elsewhere (stat icons, the unlocked-badge ring, links).
                 Circle()
-                    .fill(Color.accentColor.gradient)
-                Circle()
-                    .strokeBorder(.white.opacity(0.25), lineWidth: 1)
+                    .fill(.white)
                 VStack(spacing: Metrics.spacingXS) {
                     Image(systemName: "circle.dashed")
                         .font(.system(size: 30, weight: .medium))
                     Text("Do Nothing")
                         .font(.system(size: 17, weight: .semibold))
                 }
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
             }
             .frame(width: 176, height: 176)
-            .shadow(color: Color.accentColor.opacity(0.4), radius: 24, y: 10)
         }
         .buttonStyle(PressScaleButtonStyle())
         .changeEffect(.jump(height: 12), value: bounceTrigger)
