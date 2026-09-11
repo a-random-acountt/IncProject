@@ -4,28 +4,11 @@ import VoidCore
 struct SettingsView: View {
     var store: NothingStore
 
-    @AppStorage("void.theme") private var themeRawValue: String = AppTheme.system.rawValue
     @AppStorage("void.soundEnabled") private var soundEnabled: Bool = true
     @State private var isShowingResetConfirmation = false
 
-    private var theme: Binding<AppTheme> {
-        Binding(
-            get: { AppTheme(rawValue: themeRawValue) ?? .system },
-            set: { themeRawValue = $0.rawValue }
-        )
-    }
-
     var body: some View {
         Form {
-            Section("Appearance") {
-                Picker("Theme", selection: theme) {
-                    ForEach(AppTheme.allCases) { option in
-                        Label(option.label, systemImage: option.symbolName).tag(option)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-
             Section {
                 Toggle("Sound effects", isOn: $soundEnabled)
             } header: {
@@ -36,8 +19,6 @@ struct SettingsView: View {
 
             Section("Keyboard shortcuts") {
                 shortcutRow("⌘K", "Open the command palette")
-                shortcutRow("1–6", "Jump to a section")
-                shortcutRow("⌘,", "Open Settings")
             }
 
             Section {
@@ -53,10 +34,12 @@ struct SettingsView: View {
             Section("About") {
                 LabeledContent("Version", value: "1.6.0")
                 LabeledContent("Total clicks", value: CompactNumber.format(store.stats.totalClicks))
+                NavigationLink("Changelog") {
+                    ChangelogView()
+                }
             }
         }
         .formStyle(.grouped)
-        .navigationTitle("Settings")
         .confirmationDialog(
             "Reset all progress?",
             isPresented: $isShowingResetConfirmation,

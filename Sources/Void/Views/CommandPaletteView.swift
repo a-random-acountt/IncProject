@@ -11,7 +11,7 @@ private struct PaletteCommand: Identifiable {
 
 struct CommandPaletteView: View {
     var store: NothingStore
-    @Binding var selection: AppSection?
+    @Binding var selection: AppSection
 
     @Environment(\.dismiss) private var dismiss
     @State private var query = ""
@@ -24,9 +24,7 @@ struct CommandPaletteView: View {
                         .foregroundStyle(Color.appTextMuted)
                     TextField("Type a command…", text: $query)
                         .textFieldStyle(.plain)
-                        #if os(iOS)
                         .autocorrectionDisabled()
-                        #endif
                 }
                 .padding(Metrics.spacingMD)
 
@@ -57,11 +55,8 @@ struct CommandPaletteView: View {
                 }
                 .listStyle(.plain)
             }
-            .frame(minWidth: 360, minHeight: 420)
             .navigationTitle("Commands")
-            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
-            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Close") { dismiss() }

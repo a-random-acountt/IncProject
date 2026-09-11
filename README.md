@@ -2,26 +2,29 @@
 
 The most useless app possible, built to genuinely shippable quality.
 
-Void is a SwiftUI app (iOS + macOS) whose only real feature is a button
-that does nothing. Everything else — streaks, achievements, analytics
-charts, a changelog, a ⌘K command palette, dark mode, sound effects,
-haptics, confetti — exists purely to dress that button up as a real,
-polished product. It is fully usable, has an actual test suite, and
-takes itself completely seriously.
+Void is an iOS SwiftUI app whose only real feature is a button that
+does nothing. Everything else — streaks, achievements, analytics
+charts, a changelog, a ⌘K command palette, sound effects, haptics,
+confetti — exists purely to dress that button up as a real, polished
+product. It's dark-only by design, navigated with a floating iOS 26
+Liquid Glass tab bar, fully usable, has an actual test suite, and takes
+itself completely seriously.
 
 ## What it does
 
-| Section | What's there |
+Five tabs on a Liquid Glass bottom bar:
+
+| Tab | What's there |
 |---|---|
 | **Home** | The Do Nothing button, live stats (total clicks, streaks, "global rank"), a rotating quote of the day |
 | **Analytics** | A flat "productivity" line chart, a real per-day bar chart of clicks, and a "where your nothing went" donut broken down by time of day |
 | **Achievements** | Click- and streak-based badges with progress bars |
 | **History** | A day-grouped log of every click, timestamped |
-| **Changelog** | Fake but plausible release notes |
-| **Settings** | Theme (system/light/dark), sound toggle, keyboard shortcuts, reset progress |
+| **Settings** | Sound toggle, keyboard shortcuts, reset progress, and a Changelog page one tap deeper |
 
-Press **⌘K** anywhere to open the command palette and jump to any
-section or log a click without touching the mouse.
+Tap the magnifying-glass icon (or press **⌘K** with a hardware
+keyboard) to open the command palette and jump to any tab or log a
+click without touching the tab bar.
 
 ## Architecture
 
@@ -42,9 +45,9 @@ independent of any Apple-only UI framework:
 Package.swift            <- VoidCore package manifest
 Sources/VoidCore/        <- pure logic (Linux/macOS/CI testable)
 Tests/VoidCoreTests/     <- 28 tests covering streaks, achievements, stats, formatting
-project.yml              <- XcodeGen manifest for the SwiftUI app
+project.yml              <- XcodeGen manifest for the iOS app
 Sources/Void/             <- SwiftUI views, models, support code
-Resources/Assets.xcassets <- app icon + color assets (light/dark)
+Resources/Assets.xcassets <- app icon + dark-only color assets
 ```
 
 `VoidCore` was written and verified with a real Swift 6.3 toolchain
@@ -63,7 +66,8 @@ swift test
 
 ## Running the app
 
-You'll need a Mac with **Xcode 16+**.
+You'll need a Mac with **Xcode 26+** (for Liquid Glass and the `Tab`/
+`.glassEffect()` APIs the UI uses — the project targets iOS 26).
 
 1. Install [XcodeGen](https://github.com/yonaskolb/XcodeGen) if you don't have it:
    ```sh
@@ -73,9 +77,9 @@ You'll need a Mac with **Xcode 16+**.
    ```sh
    xcodegen generate
    ```
-3. Open `Void.xcodeproj`, pick the **Void-iOS** or **Void-macOS** scheme,
-   select a run destination (a simulator, or "My Mac"), and hit Run.
-   The first time, Xcode will ask you to pick a signing team for
+3. Open `Void.xcodeproj`, pick the **Void** scheme, select a run
+   destination (an iOS 26 simulator, or a device), and hit Run. The
+   first time, Xcode will ask you to pick a signing team for
    "Automatically manage signing" — any personal team works for local
    development.
 4. Xcode will resolve the three package dependencies
@@ -83,6 +87,9 @@ You'll need a Mac with **Xcode 16+**.
    [Shimmer](https://github.com/markiv/SwiftUI-Shimmer),
    [Pow](https://github.com/EmergeTools/Pow)) automatically on first
    build.
+
+The app forces dark mode (`UIUserInterfaceStyle: Dark` +
+`.preferredColorScheme(.dark)`) — there's no light theme, by design.
 
 If Xcode flags a minor API mismatch on one of those three packages (the
 UI layer couldn't be compiled outside Xcode to verify against their

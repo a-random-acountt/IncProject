@@ -4,31 +4,13 @@
       "color": {
         "color-space": "srgb",
         "components": {
-          "red": "0xFF",
-          "green": "0xFF",
-          "blue": "0xFF",
-          "alpha": "1.000"
-        }
-      },
-      "idiom": "universal"
-    },
-    {
-      "color": {
-        "color-space": "srgb",
-        "components": {
           "red": "0x1B",
           "green": "0x1B",
           "blue": "0x23",
           "alpha": "1.000"
         }
       },
-      "idiom": "universal",
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ]
+      "idiom": "universal"
     }
   ],
   "info": {

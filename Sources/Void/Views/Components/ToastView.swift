@@ -19,9 +19,8 @@ private struct ToastOverlay: View {
         }
         .padding(.horizontal, Metrics.spacingLG)
         .padding(.vertical, Metrics.spacingMD)
-        .background(.thinMaterial, in: Capsule())
-        .overlay(Capsule().strokeBorder(Color.appBorder, lineWidth: Metrics.hairline))
-        .shadow(color: .black.opacity(0.18), radius: 16, y: 6)
+        .glassEffect(in: Capsule())
+        .shadow(color: .black.opacity(0.35), radius: 16, y: 6)
     }
 }
 

@@ -30,13 +30,9 @@ struct HistoryView: View {
                         }
                     }
                 }
-                #if os(macOS)
-                .listStyle(.inset)
-                #endif
             }
         }
         .background(Color.appBackground)
-        .navigationTitle("History")
     }
 
     private var groupedEvents: [(label: String, events: [NothingEvent])] {

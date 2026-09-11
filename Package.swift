@@ -9,8 +9,7 @@ import PackageDescription
 let package = Package(
     name: "VoidCore",
     platforms: [
-        .iOS(.v17),
-        .macOS(.v14),
+        .iOS(.v17)
     ],
     products: [
         .library(name: "VoidCore", targets: ["VoidCore"])

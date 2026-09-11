@@ -15,6 +15,8 @@ struct ChangelogView: View {
             .frame(maxWidth: .infinity)
         }
         .background(Color.appBackground)
+        .navigationTitle("Changelog")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private var header: some View {
