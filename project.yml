@@ -24,13 +24,13 @@ targets:
     deploymentTarget: "26.0"
     sources:
       - path: Sources/Void
-    resources:
       - path: Resources/Assets.xcassets
     dependencies:
       - package: VoidCore
       - package: ConfettiSwiftUI
       - package: Shimmer
       - package: Pow
+    scheme: {}
     settings:
       base:
         PRODUCT_NAME: Void
