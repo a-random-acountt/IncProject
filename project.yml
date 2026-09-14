@@ -1,0 +1,55 @@
+name: Void
+options:
+  bundleIdPrefix: com.example.void
+  deploymentTarget:
+    iOS: "26.0"
+
+targets:
+  Void:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Void
+    settings:
+      base:
+        PRODUCT_NAME: Void
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.void
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "6.0"
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        INFOPLIST_KEY_CFBundleDisplayName: Void
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIUserInterfaceStyle: Dark
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGN_STYLE: Automatic
+
+  VoidTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: VoidTests
+    dependencies:
+      - target: Void
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Automatic
+
+schemes:
+  Void:
+    build:
+      targets:
+        Void: all
+        VoidTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - VoidTests
